@@ -54,7 +54,6 @@ public class ImageAdapter extends ArrayAdapter<Image> {
         activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
         int height = metrics.heightPixels;
         int width = metrics.widthPixels;
-//        String URL = "https://farm1.staticflickr.com/527/31988622650_c06c4093b6_b.jpg"; // TODO a5leha imageObject.getURL();
         String URL = imageObject.getURL();
         Picasso.with(context).load(URL).resize(width,height/2).onlyScaleDown().into(holder.imageView);
 

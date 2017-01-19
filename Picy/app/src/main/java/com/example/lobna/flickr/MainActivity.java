@@ -3,6 +3,8 @@ package com.example.lobna.flickr;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ public class MainActivity extends AppCompatActivity implements ImageListener {
     private static ListView imagesListView;
     private ImageAdapter imageAdapter;
 
+    private ImageView searchBackgroundImage;
     private SearchView searchImages;
 
     @Override
@@ -20,6 +23,8 @@ public class MainActivity extends AppCompatActivity implements ImageListener {
         setContentView(R.layout.activity_main);
 
         imagesListView = (ListView) findViewById(R.id.imagesListView);
+
+        searchBackgroundImage = (ImageView) findViewById(R.id.searchBackgroundImage);
 
         searchImages = (SearchView) findViewById(R.id.searchImages);
         searchImages.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -45,6 +50,11 @@ public class MainActivity extends AppCompatActivity implements ImageListener {
 
     @Override
     public void onDownloadFinished(final ArrayList<Image> images) {
+        if(images.size() != 0){
+            searchBackgroundImage.setVisibility(View.INVISIBLE);
+        }else{
+            searchBackgroundImage.setVisibility(View.VISIBLE);
+        }
         imageAdapter = new ImageAdapter(this, this, images);
         imagesListView.setAdapter(imageAdapter);
     }
